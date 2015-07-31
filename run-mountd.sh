@@ -7,7 +7,8 @@ for mnt in "$@"; do
     >&2 echo "Path to NFS export must be inside of the \"/exports/\" directory"
     exit 1
   fi
-  mkdir -p "$mnt"
+  mkdir -p $mnt
+  chmod 777 $mnt
   echo "$mnt *(rw,sync,no_subtree_check,no_root_squash)" >> /etc/exports
 done
 
