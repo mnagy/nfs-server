@@ -3,8 +3,12 @@
 set -eu
 
 for mnt in "$@"; do
-  mkdir -p "/exports/$mnt"
-  echo "/exports/$mnt *(rw,sync,no_subtree_check,no_root_squash)" >> /etc/exports
+  if [[ ! "$mnt" =~ "/exports/" ]]; then
+    >&2 echo "Path to NFS export must be inside of the \"/exports/\" directory"
+    exit 1
+  fi
+  mkdir -p "$mnt"
+  echo "$mnt *(rw,sync,no_subtree_check,no_root_squash)" >> /etc/exports
 done
 
 exportfs -a
