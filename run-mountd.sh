@@ -9,7 +9,7 @@ for mnt in "$@"; do
   fi
   mkdir -p $mnt
   chmod 777 $mnt
-  echo "$mnt *(rw,sync,no_subtree_check,no_root_squash)" >> /etc/exports
+  echo "$mnt *(rw,sync,no_subtree_check,no_root_squash,fsid=0)" >> /etc/exports
 done
 
 exportfs -a
