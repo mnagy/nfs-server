@@ -3,7 +3,7 @@
 set -eu
 
 for mnt in "$@"; do
-  if [[ ! "$mnt" =~ "/exports/" ]]; then
+  if [[ ! "$mnt" =~ ^/exports/ ]]; then
     >&2 echo "Path to NFS export must be inside of the \"/exports/\" directory"
     exit 1
   fi
